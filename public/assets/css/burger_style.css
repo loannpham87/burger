@@ -1,0 +1,93 @@
+#happy_burger {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title {
+    text-align: center;
+    font-size: 48px;
+    font-family: 'Barriecito', cursive;
+}
+
+.subtitles {
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bolder;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#create-button {
+    background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bolder;
+}
+
+#eat-button {
+    background-color: rgb(199, 11, 11);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 50px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bolder;
+    margin: 10px auto 10px;
+
+
+}
+
+#create-box {
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+#text-box {
+    padding: 10px;
+    margin: 30px;
+    text-align: center;
+    border: #4CAF50 2px solid;
+    color: rgb(199, 78, 23);
+    font-weight: bold;
+}
+
+.card-body {
+    height: auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 980px) {
+    .wrapper{
+        width:600px;
+      }
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper{
+        width:600px;
+      }
+    }
+
+@media screen and (max-width: 640px) {
+    header {
+        position: static;
+    }
+
+    .wrapper{
+        width:600px;
+      }
+    }
