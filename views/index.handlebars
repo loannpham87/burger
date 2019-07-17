@@ -1,104 +1,69 @@
-<h1 id="title">Eat Da Burger !</h1>
+<div class="row">
+    <div class="col-6 text-left">
+        <img src="/assets/img/burger.jpg" id="happy_burger" height="300px" width="300px">
+    </div>
 
-{{!-- <div id="container"> --}}
+    <div class="col-6 text-center">
+        <h1 id="title">Eat Da </h1><br>
+        <h1 id="burger-title"> Burger !</h1>
+    </div>
+</div>
 
 <div id="burger-options">
     <div class="row">
-        <div class="col-3 text-left">
+  <div class="col-1">
+        </div>
+        <div class="col-3 text-center">
             <h2 class="subtitles">Burger Options</h2>
-            <form id="eatburger" class="button-size">
+                <form id="eatburger" class="button-size">
+                    
+                        {{#each burgers}} <hr>
+                        {{#unless eaten}} 
+                    <span>
+                        {{this.burger}}<button type="submit" id="eat-button" data-id="{{burger.id}}">Eat Burger !</button>
+                    </span>
+                        {{/unless}} 
+                        {{/each}} <hr>
+                  
+                </form>
+        </div>
+
+        <div class="col-1">
+        </div>
+
+        <div class="col-3 text-center">
+            <div id="create-box">
+
+            <h2 class="subtitles">Create a Burger</h2>
+                <form id="createburger" class="button-size" action="/api/burgers" method="POST">
+                    <textarea type="text" name="burger" id="text-box"
+                    placeholder="Put your burger order in here!"></textarea><br>
+                        <button type="submit" id="create-button">Give me my burger !</button>
+                </form>
+        </div>
+    </div>
+
+    <div class="col-1">
+        </div>
+
+        <div class="col-3 text-center">
+            <div id="delete-order">
+
+            <h2 class="subtitles">Delete Order</h1>
                 {{#each burgers}}
-                {{#unless burgereaten}}
-
-                <div class="card">
-                    <div class="card-body">
-                        <option value="{{this.id}}">{{this.burger}}</option><br>
-                    </div>
-                </div>
-
-                <button type="submit" id="eat-button">Eat Burger !</button>
-                {{/unless}}
+                {{#if eaten}}
+            <h3>
+                <span>
+                    {{this.burger}}<button class="delete-burger" data-id="{{this.id}}">Delete burger order</button>
+                </span>
+            </h3>
+                {{/if}}
                 {{/each}}
         </div>
-
-        <div id="create-box">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="subtitles">Create a Burger</h2>
-                    <form id="createburger" class="button-size">
-                        <textarea type="text" name="burger" id="text-box"
-                            placeholder="Put your burger order in here!"></textarea><br>
-                        <button type="submit" id="create-button">Give me my burger !</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        </form>
     </div>
+
 </div>
-{{!-- </div> --}}
-<script type="text/javascript">
 
-    $("#createburger").on("submit", function (event) {
-        // Make sure to preventDefault on a submit event.
-        event.preventDefault();
+ 
 
-        // [name=burger] will find an element with a "name" attribute equal to the string "burger"
-        var newBurger = {
-            burger: $("#createburger [name=burger]").val().trim()
-        };
 
-        // Send the POST request.
-        $.ajax("/api/burgers", {
-            type: "POST",
-            data: newBurger
-        }).then(
-            function () {
-                console.log("created new burger");
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );
-    });
-
-    $("#eatburger").on("submit", function (event) {
-        // Make sure to preventDefault on a submit event.
-        event.preventDefault();
-
-        // Get the ID by finding an element with a "name" attribute equal to the string "id"
-        var id = $("[name=id]").val().trim();
-
-        // Send the PUT request.
-        $.ajax("/api/burger/" + id, {
-            type: "PUT",
-            data: { eatBurger: true }
-        }).then(
-            function () {
-                console.log("updated id ", id);
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );
-    });
-
-    $("#burgereaten").on("submit", function (event) {
-        // Make sure to preventDefault on a submit event.
-        event.preventDefault();
-
-        // Get the ID by finding an element with a "name" attribute equal to the string "id"
-        var id = $("[name=id]").val().trim();
-
-        // Send the DELETE request.
-        $.ajax("/api/burger/" + id, {
-            type: "DELETE",
-        }).then(
-            function () {
-                console.log("updated id ", id);
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );
-    });
-</script>

@@ -5,9 +5,14 @@ var router = express.Router();
 // Import the model (burger.js) to use its database functions.
 var burger = require("../models/burger.js");
 
+// get route
+// router.get("/", function(req, res){
+//   res.redirect("/");
+// });
+
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-  burger.all(function(data) {
+  burger.selectAll(function(data) {
     var hbsObject = {
       burgers: data
     };
@@ -16,33 +21,24 @@ router.get("/", function(req, res) {
   });
 });
 
-router.get("/api/all", function (req, res) {
-    burger.all(function (data) {
-        var hbsObject = {
-            burgers: data
-        };
-        console.log(hbsObject);
-        //   res.render("index", hbsObject);
-        res.json(data);
-    });
-});
-
 router.post("/api/burgers", function(req, res) {
-  burger.create([
-    "id", "burger"
+  burger.insertOne([
+    "burger", "eaten"
   ], [
-    req.params.id, req.body.burger
+    req.body.burger, false
   ], function(result) {
     // Send back the ID of the new burger
-    res.json({ id: result.insertId });
+    // res.json({ id: result.insertId });
+    res.redirect("/");
+
   });
 });
 
 router.put("/api/burgers/:id", function(req, res) {
   var burgerId = "id = " + req.params.id;
 
-  burger.update({
-    eatBurger: true, 
+  burger.updateOne({
+    eaten: true, 
   }, burgerId, function(result) {
     if (result.changedRows == 0) {
       // If no rows were changed, then the ID must not exist, so 404
