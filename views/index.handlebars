@@ -20,7 +20,7 @@
                         {{#each burgers}} <hr>
                         {{#unless eaten}} 
                     <span>
-                        {{this.burger}}<button type="submit" id="eat-button" data-id="{{burger.id}}">Eat Burger !</button>
+                        {{this.burger}}<button type="submit" id="eat-button" data-id="{{this.id}}">Eat Burger !</button>
                     </span>
                         {{/unless}} 
                         {{/each}} <hr>
@@ -54,7 +54,7 @@
                 {{#if eaten}}
             <h3>
                 <span>
-                    {{this.burger}}<button class="delete-burger" data-id="{{this.id}}">Delete burger order</button>
+                    {{this.burger}}<button type="submit" class="delete-burger" data-id="{{this.id}}">Delete burger order</button>
                 </span>
             </h3>
                 {{/if}}

@@ -21,31 +21,51 @@ router.get("/", function(req, res) {
   });
 });
 
-router.post("/api/burgers", function(req, res) {
-  burger.insertOne([
-    "burger", "eaten"
-  ], [
-    req.body.burger, false
-  ], function(result) {
-    // Send back the ID of the new burger
-    // res.json({ id: result.insertId });
-    res.redirect("/");
+// router.post("/api/burgers", function(req, res) {
+//   burger.insertOne([
+//     "burger", "eaten"
+//   ], [
+//     req.body.burger, false
+//   ], function(result) {
+//     // Send back the ID of the new burger
+//     // res.json({ id: result.insertId });
+//     res.redirect("/");
 
+//   });
+// });
+
+router.post("/api/burgers", function(req, res) {
+  // takes the request object using it as input for burger.addBurger
+  burger.insertOne(req.body.burger, function(result) {
+    // wrapper for orm.js that using MySQL insert callback will return a log to console,
+    // render back to index with handle
+    console.log(result);
+    res.redirect("/");
   });
 });
 
-router.put("/api/burgers/:id", function(req, res) {
-  var burgerId = "id = " + req.params.id;
+// router.put("/api/burgers/:id", function(req, res) {
+//   var burgerId = "id = " + req.params.id;
 
-  burger.updateOne({
-    eaten: true, 
-  }, burgerId, function(result) {
-    if (result.changedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
-    }
+//   burger.updateOne({
+//     eaten: true, 
+//   }, burgerId, function(result) {
+//     if (result.changedRows == 0) {
+//       // If no rows were changed, then the ID must not exist, so 404
+//       return res.status(404).end();
+//     } else {
+//       res.status(200).end();
+//     }
+//   });
+// });
+
+router.put("/api/burgers/:id", function(req, res) {
+  burger.update(req.params.id, function(result) {
+    // wrapper for orm.js that using MySQL update callback will return a log to console,
+    // render back to index with handle
+    console.log(result);
+    // Send back response and let page reload from .then in Ajax
+    res.sendStatus(200);
   });
 });
 

@@ -81,11 +81,11 @@ $(function () {
     //move burger to delete order div
     $("#eat-button").on("click", function (event) {
         // Make sure to preventDefault on a submit event.
-        // event.preventDefault();
+         event.preventDefault();
         // Get the ID by finding an element with a "name" attribute equal to the string "id"
         var id = $(this).attr("data-id");
         // Send the PUT request.
-        $.ajax("/api/burger/" + id, {
+        $.ajax({
             method: "PUT",
             // data: { eatBurger: true }
             url: "/api/burgers/" + id
