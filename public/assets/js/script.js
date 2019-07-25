@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
 
     // $("#create-button").on("click", function (event) {
     //     event.preventDefault();
@@ -81,16 +81,15 @@ $(function () {
     //move burger to delete order div
     $("#eat-button").on("click", function (event) {
         // Make sure to preventDefault on a submit event.
-         event.preventDefault();
+         //event.preventDefault();
         // Get the ID by finding an element with a "name" attribute equal to the string "id"
         var id = $(this).attr("data-id");
         // Send the PUT request.
         $.ajax({
             method: "PUT",
-            // data: { eatBurger: true }
-            url: "/api/burgers/" + id
+            url: "/burgers/" + id
         }).then(
-            function () {
+            function (data) {
                 console.log("updated id ", id);
                 // Reload the page to get the updated list
                 location.reload();
@@ -99,17 +98,17 @@ $(function () {
     });
 
     //delete burger on submit
-    $("#delete-burger").on("click", function (event) {
+    $(".delete-burger").on("click", function (event) {
         // Make sure to preventDefault on a submit event.
-        // event.preventDefault();
+         //event.preventDefault();
         // Get the ID by finding an element with a "name" attribute equal to the string "id"
         var id = $(this).attr("data-id");
         // Send the DELETE request.
-        $.ajax("/api/burger/" + id, {
+        $.ajax({
             method: "DELETE",
-            // url: "/bugers/delete/" + id
+            url: "/burgers/delete/" + id
         }).then(
-            function () {
+            function (data) {
                 console.log("updated id ", id);
                 // Reload the page to get the updated list
                 location.reload();

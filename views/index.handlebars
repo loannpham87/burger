@@ -15,17 +15,17 @@
         </div>
         <div class="col-3 text-center">
             <h2 class="subtitles">Burger Options</h2>
-                <form id="eatburger" class="button-size">
+                <div id="eatburger" class="button-size">
                     
-                        {{#each burgers}} <hr>
-                        {{#unless eaten}} 
+                        {{#each burgers}}
+                        {{#unless eaten}}<hr>
                     <span>
-                        {{this.burger}}<button type="submit" id="eat-button" data-id="{{this.id}}">Eat Burger !</button>
+                        {{this.burger}}<button id="eat-button" data-id="{{this.id}}">Eat Burger !</button>
                     </span>
                         {{/unless}} 
                         {{/each}} <hr>
                   
-                </form>
+                </div>
         </div>
 
         <div class="col-1">
@@ -35,7 +35,7 @@
             <div id="create-box">
 
             <h2 class="subtitles">Create a Burger</h2>
-                <form id="createburger" class="button-size" action="/api/burgers" method="POST">
+                <form id="createburger" class="button-size" action="/burgers/create" method="POST">
                     <textarea type="text" name="burger" id="text-box"
                     placeholder="Put your burger order in here!"></textarea><br>
                         <button type="submit" id="create-button">Give me my burger !</button>
@@ -51,14 +51,14 @@
 
             <h2 class="subtitles">Delete Order</h1>
                 {{#each burgers}}
-                {{#if eaten}}
+                {{#if eaten}}<hr>
             <h3>
                 <span>
-                    {{this.burger}}<button type="submit" class="delete-burger" data-id="{{this.id}}">Delete burger order</button>
+                    {{this.burger}}<button class="delete-burger" data-id="{{this.id}}">Delete burger order</button>
                 </span>
             </h3>
                 {{/if}}
-                {{/each}}
+                {{/each}}<hr>
         </div>
     </div>
 
